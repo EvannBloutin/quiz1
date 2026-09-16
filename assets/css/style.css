@@ -1,0 +1,248 @@
+/* =========================================================
+   Design tokens
+   Concept: a field dossier for a river city — Nantes is built
+   where the Loire splits around its islands, and its landmark
+   is a giant mechanical elephant grown out of an old shipyard.
+   The palette leans on oxidised steel and river light rather
+   than the usual warm-cream/terracotta default; the recurring
+   line motif traces the actual river's course past the city.
+   ========================================================= */
+
+:root {
+  --ink: #16212b;        /* deep slate, river at dusk */
+  --ink-soft: #3c4c58;
+  --paper: #eef1ee;       /* pale river mist */
+  --paper-raised: #e2e7e1;
+  --rust: #b5622e;        /* oxidised steel / the Grand Éléphant */
+  --patina: #4f7c6c;      /* verdigris roofs of the Château */
+  --line: #c7cdc6;
+  --max-content: 42rem;
+  --sidebar-w: 15rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #eef1ee;
+    --ink-soft: #b7c2c7;
+    --paper: #10171c;
+    --paper-raised: #182027;
+    --line: #2b363d;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+h1, h2, h3, .brand {
+  font-family: "Fraunces", Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+}
+
+h1 { font-size: clamp(2.1rem, 4vw + 1rem, 3.4rem); font-weight: 500; }
+h2 { font-size: 1.6rem; margin-top: 2.4em; }
+h3 { font-size: 1.15rem; margin-top: 1.6em; }
+
+p { max-width: 38rem; }
+a { color: var(--rust); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, .nav-link:focus-visible {
+  outline: 2px solid var(--patina);
+  outline-offset: 3px;
+}
+
+img { max-width: 100%; display: block; border-radius: 2px; }
+
+/* ---------- layout: fixed river-bank sidebar + reading column ---------- */
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  padding: 2.2rem 1.6rem;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+}
+
+.brand {
+  font-size: 1.3rem;
+  margin-bottom: 0.1em;
+}
+.brand-role {
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  margin-bottom: 1.6rem;
+}
+
+.river-line { margin: 0.4rem 0 1.8rem; }
+.river-line path {
+  fill: none;
+  stroke: var(--patina);
+  stroke-width: 2;
+}
+
+.nav-list { list-style: none; margin: 0; padding: 0; }
+.nav-list li + li { margin-top: 0.35rem; }
+
+.nav-link {
+  display: block;
+  padding: 0.35rem 0;
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  padding-left: 0.7rem;
+  margin-left: -0.7rem;
+}
+.nav-link:hover { color: var(--ink); }
+.nav-link[aria-current="page"] {
+  color: var(--ink);
+  border-left-color: var(--rust);
+  font-weight: 600;
+}
+
+.sidebar-foot {
+  margin-top: auto;
+  padding-top: 1.6rem;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+.sidebar-foot a { color: var(--ink-soft); }
+
+/* mobile top bar */
+.topbar { display: none; }
+
+main {
+  flex: 1;
+  padding: 3.4rem 2rem 5rem;
+  max-width: calc(var(--max-content) + 4rem);
+}
+
+.eyebrow {
+  color: var(--patina);
+  font-size: 0.85rem;
+  margin: 0 0 0.6rem;
+}
+
+.lede {
+  font-size: 1.15rem;
+  color: var(--ink-soft);
+}
+
+/* a hairline rule used to close a section, never as decoration */
+hr.rule {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 2.6rem 0;
+}
+
+/* dossier entries — used for Local Food & Tourist Places */
+.entry {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: 1.4rem;
+  padding: 1.6rem 0;
+  border-top: 1px solid var(--line);
+  align-items: start;
+}
+.entry:last-child { border-bottom: 1px solid var(--line); }
+.entry img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.entry h3 { margin-top: 0; }
+.entry .note {
+  display: inline-block;
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--patina);
+}
+
+/* profile: CV-style two column */
+.cv-row {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 1.2rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--line);
+}
+.cv-row:last-child { border-bottom: 1px solid var(--line); }
+.cv-row dt {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.01em;
+}
+.cv-row dd { margin: 0; }
+
+.headshot {
+  width: 9rem;
+  height: 9rem;
+  object-fit: cover;
+  border-radius: 3px;
+  float: right;
+  margin: 0 0 1rem 1.6rem;
+}
+
+/* homepage hero */
+.hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.6rem;
+  margin-top: 2rem;
+  padding: 0;
+  list-style: none;
+}
+.hero-links a {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--rust);
+  padding-bottom: 2px;
+}
+
+@media (max-width: 780px) {
+  .layout { flex-direction: column; }
+  .sidebar { display: none; }
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar .brand { font-size: 1.05rem; margin: 0; }
+  .topbar-toggle {
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 0.4rem 0.7rem;
+    font: inherit;
+    color: var(--ink);
+  }
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    padding: 0.4rem 1.2rem 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav .nav-link { padding: 0.55rem 0; margin-left: 0; }
+  main { padding: 2.2rem 1.3rem 3.5rem; }
+  .entry, .cv-row { grid-template-columns: 1fr; }
+  .headshot { float: none; width: 8rem; height: 8rem; margin: 0 0 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
