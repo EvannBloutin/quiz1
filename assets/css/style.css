@@ -10,13 +10,29 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme]) {
     --ink: #eef1ee;
     --ink-soft: #b7c2c7;
     --paper: #10171c;
     --paper-raised: #182027;
     --line: #2b363d;
   }
+}
+
+:root[data-theme="dark"] {
+  --ink: #eef1ee;
+  --ink-soft: #b7c2c7;
+  --paper: #10171c;
+  --paper-raised: #182027;
+  --line: #2b363d;
+}
+
+:root[data-theme="light"] {
+  --ink: #16212b;
+  --ink-soft: #3c4c58;
+  --paper: #eef1ee;
+  --paper-raised: #e2e7e1;
+  --line: #c7cdc6;
 }
 
 * { box-sizing: border-box; }
@@ -51,6 +67,54 @@ a:focus-visible, button:focus-visible, .nav-link:focus-visible {
 }
 
 img { max-width: 100%; display: block; border-radius: 2px; }
+
+.theme-toggle,
+.back-to-top,
+.image-modal-close {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--paper-raised);
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+
+.theme-toggle { margin-top: 1rem; padding: 0.35rem 0.6rem; }
+.theme-toggle:hover,
+.back-to-top:hover,
+.image-modal-close:hover { border-color: var(--rust); }
+
+.back-to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 10;
+  padding: 0.55rem 0.75rem;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.5rem);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+.back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+.zoomable-image { cursor: zoom-in; }
+.image-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  background: rgba(16, 23, 28, 0.82);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+.image-modal.open { opacity: 1; pointer-events: auto; }
+.image-modal-content { position: relative; max-width: min(90vw, 70rem); max-height: 90vh; }
+.image-modal-image { max-height: 85vh; width: auto; object-fit: contain; }
+.image-modal-close { position: absolute; top: -2.5rem; right: 0; padding: 0.35rem 0.6rem; }
+.modal-open { overflow: hidden; }
 
 /* ---------- layout: fixed river-bank sidebar + reading column ---------- */
 
@@ -233,6 +297,7 @@ hr.rule {
     font: inherit;
     color: var(--ink);
   }
+  .topbar .theme-toggle { margin: 0 0.6rem 0 auto; }
   .mobile-nav {
     display: none;
     flex-direction: column;
