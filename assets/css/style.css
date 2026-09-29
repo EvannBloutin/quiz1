@@ -1,13 +1,3 @@
-/* =========================================================
-   Design tokens
-   Concept: a field dossier for a river city — Nantes is built
-   where the Loire splits around its islands, and its landmark
-   is a giant mechanical elephant grown out of an old shipyard.
-   The palette leans on oxidised steel and river light rather
-   than the usual warm-cream/terracotta default; the recurring
-   line motif traces the actual river's course past the city.
-   ========================================================= */
-
 :root {
   --ink: #16212b;        /* deep slate, river at dusk */
   --ink-soft: #3c4c58;
@@ -150,7 +140,7 @@ hr.rule {
   margin: 2.6rem 0;
 }
 
-/* dossier entries — used for Local Food & Tourist Places */
+/* dossier entries - used for Local Food & Tourist Places */
 .entry {
   display: grid;
   grid-template-columns: 9rem 1fr;
